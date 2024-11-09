@@ -18,7 +18,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-	    overflow: hidden;
+
 	 
         }
         .container {
@@ -78,7 +78,7 @@
             display: block;
         }
         .cinta, .cinta3 {
-            width: 150000%;
+            width: 25000%;
             overflow: hidden;
             padding: 10px 0;
             margin-top: 10px;
@@ -92,7 +92,7 @@
         }
         .scroll {
             display: flex;
-            animation: scroll 15000s linear infinite;
+            animation: scroll 2000s linear infinite;
             will-change: transform;
 	}
  	.scroll2 {
@@ -137,7 +137,7 @@
             font-size: 350px;
             font-weight: bold;
             margin-top: 20px;
-            color: black;
+            color: white;
         }
         .hidden {
             display: none;
@@ -163,6 +163,17 @@
             padding: 10px;
             border-radius: 10px;
         }
+	    .car {
+            position: absolute;
+            width: 100px;
+            height: auto;
+	    opacity: .8;
+	    transform: rotate(20deg);
+            transition: transform 0.5s;
+	    animation: caer 5s linear infinite;
+
+}
+	    }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
@@ -1950,6 +1961,36 @@
     </div>
 
     <script>
+	    // URL de la imagen del Mini Cooper
+    const carImgUrl = "https://emblerautopartes.mx/wp-content/uploads/2023/05/Mini-1536x1020.png";
+
+    function createCar() {
+        const car = document.createElement("img");
+        car.src = carImgUrl;
+        car.classList.add("car");
+        car.style.left = Math.random() * window.innerWidth + "px";
+        car.style.top = "-50px"; // Empieza fuera de la pantalla en la parte superior
+        document.body.appendChild(car);
+
+        // Animación de caída
+        let speed = Math.random() * 3 + 2; // Velocidad de caída
+        function fall() {
+            const currentTop = parseFloat(car.style.top);
+            if (currentTop < window.innerHeight) {
+                car.style.top = currentTop + speed + "px";
+                requestAnimationFrame(fall);
+            } else {
+                car.style.top = "-50px";
+                car.style.left = Math.random() * window.innerWidth + "px";
+                fall();
+            }
+        }
+        fall();
+    }
+
+    // Crear múltiples automóviles de manera continua
+    setInterval(createCar, 9000);
+
         const participants = [
             { name: "Daniel", guess: 241196 },
 { name: "Jose Joacim Villavicencio Gómez ", guess: 39000 },
